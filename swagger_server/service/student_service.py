@@ -18,7 +18,9 @@ def add(student=None):
     query = reduce(lambda a, b: a & b, queries)
     res = student_db.search(query)
     if res:
-        return 'already exists', 409
+        response = jsonify({"message": "Student already exists"})
+        response.status_code = 409
+        return response
 
     doc_id = student_db.insert(student.to_dict())
     student.student_id = doc_id
@@ -28,7 +30,9 @@ def add(student=None):
 def get_by_id(student_id=None, subject=None):
     student = student_db.get(doc_id=int(student_id))
     if not student:
-        return jsonify({"message": "Student not found"}), 404
+        response = jsonify({"message": "Student not found"})
+        response.status_code = 404
+        return response
     student['student_id'] = student_id
     print(student)
     return student
@@ -37,6 +41,8 @@ def get_by_id(student_id=None, subject=None):
 def delete(student_id=None):
     student = student_db.get(doc_id=int(student_id))
     if not student:
-        return 'not found', 404
+        response = jsonify({"message": "Student not found"})
+        response.status_code = 404
+        return response
     student_db.remove(doc_ids=[int(student_id)])
     return student_id
