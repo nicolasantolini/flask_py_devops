@@ -34,12 +34,7 @@ def delete_student(student_id: int):  # noqa: E501
 
     :rtype: None
     """
-    student = get_by_id(student_id)
-    if not student:
-        return jsonify({"message": "Student not found"}), 404
-
-    delete(student_id)
-    return jsonify({"message": "Student deleted successfully"}), 200
+    return delete(student_id)
 
 
 def get_student_by_id(student_id: int):  # noqa: E501
@@ -52,8 +47,4 @@ def get_student_by_id(student_id: int):  # noqa: E501
 
     :rtype: Student
     """
-    student = get_by_id(student_id)
-    if not student:
-        return jsonify({"message": "Student not found"}), 404
-
-    return jsonify(student), 200
+    return get_by_id(student_id)

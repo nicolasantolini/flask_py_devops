@@ -2,6 +2,7 @@ import os
 import tempfile
 from functools import reduce
 
+from flask import jsonify
 from tinydb import TinyDB, Query
 
 db_dir_path = tempfile.gettempdir()
@@ -27,7 +28,7 @@ def add(student=None):
 def get_by_id(student_id=None, subject=None):
     student = student_db.get(doc_id=int(student_id))
     if not student:
-        return 'not found', 404
+        return jsonify({"message": "Student not found"}), 404
     student['student_id'] = student_id
     print(student)
     return student
