@@ -3,6 +3,7 @@ on: [push]
 env:
   IMAGE_NAME: student_service
   REPO_NAME: flask_py_devops
+  REGISTRY: docker.io
 
 
 jobs:
