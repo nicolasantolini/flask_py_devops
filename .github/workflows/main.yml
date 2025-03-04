@@ -60,4 +60,4 @@ jobs:
 
     - name: Push image to docker hub Container Registry
       run: | 
-          docker push flask_py_devops/$IMAGE_NAME
+          docker push nicolasantolini/$IMAGE_NAME
