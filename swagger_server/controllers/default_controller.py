@@ -1,5 +1,6 @@
 import connexion
 import six
+from flask import jsonify
 
 from swagger_server.models import Student
 from swagger_server.service.student_service import *
@@ -52,6 +53,10 @@ def get_student_by_id(student_id: int):  # noqa: E501
     """
     student = get_by_id(student_id)
     if not student:
-        return 404, "student not found"
+        response = jsonify({"message": "Student not found"})
+        response.status_code = 404  # ✅ Correctly sets the HTTP 404 status
+        return response
 
-    return student, 200
+    response = jsonify({"message": student})
+    response.status_code = 200  # ✅ Correctly sets the HTTP 404 status
+    return response
