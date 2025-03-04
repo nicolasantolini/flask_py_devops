@@ -2,7 +2,7 @@ name: Build Test and push
 on: [push]
 env:
   IMAGE_NAME: student_service
-  REPO_NAME: flask_py_devops
+  REPO_NAME: nicolasantolini
   REGISTRY: docker.io
 
 
