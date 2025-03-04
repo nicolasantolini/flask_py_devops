@@ -34,7 +34,7 @@ def delete_student(student_id: int):  # noqa: E501
     """
     student = get_by_id(student_id)
     if not student:
-        return {"message": "Student not found"}, 404
+        return 404, "student not found"
 
     delete(student_id)
     return {"message": "Student deleted successfully"}, 200
@@ -52,6 +52,6 @@ def get_student_by_id(student_id: int):  # noqa: E501
     """
     student = get_by_id(student_id)
     if not student:
-        return {"message": "Student not found"}, 404
+        return 404, "student not found"
 
     return student, 200
