@@ -19,38 +19,39 @@ def add_student(body=None):  # noqa: E501
     if connexion.request.is_json:
         body = Student.from_dict(connexion.request.get_json())  # noqa: E501
         return add(body)
-    return 500, 'error'
+    return {"message": "Invalid input, expected JSON"}, 400
 
 
-def delete_student(student_id: float):  # noqa: E501
+def delete_student(student_id: int):  # noqa: E501
     """Deletes a student
 
     Deletes a single student # noqa: E501
 
     :param student_id: the uid
-    :type student_id: float
+    :type student_id: int
 
     :rtype: None
     """
     student = get_by_id(student_id)
-    if student == (404, 'not found'):
-        return 404, 'not found'
+    if not student:
+        return {"message": "Student not found"}, 404
 
-    return delete(student_id)
+    delete(student_id)
+    return {"message": "Student deleted successfully"}, 200
 
 
-def get_student_by_id(student_id: float):  # noqa: E501
+def get_student_by_id(student_id: int):  # noqa: E501
     """Gets student
 
     Returns a single student # noqa: E501
 
     :param student_id: the uid
-    :type student_id: float
+    :type student_id: int
 
     :rtype: Student
     """
     student = get_by_id(student_id)
-    if student == (404, 'not found'):
-        return 404, 'not found'
+    if not student:
+        return {"message": "Student not found"}, 404
 
-    return student
+    return student, 200
