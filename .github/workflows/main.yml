@@ -3,6 +3,7 @@ on: [push]
 env:
   IMAGE_NAME: student_service
   REPO_NAME: flask_py_devops
+  REGISTRY: docker.io
 
 
 jobs:
@@ -59,4 +60,4 @@ jobs:
 
     - name: Push image to docker hub Container Registry
       run: | 
-          docker push $REPO_NAME/$IMAGE_NAME
+          docker push flask_py_devops/$IMAGE_NAME
