@@ -19,8 +19,9 @@ def add_student(body=None):  # noqa: E501
     """
     if connexion.request.is_json:
         body = Student.from_dict(connexion.request.get_json())  # noqa: E501
-        return add(body)
-    return {"message": "Invalid input, expected JSON"}, 400
+        student_id = add(body)
+        return jsonify({"student_id": student_id}), 201
+    return jsonify({"message": "Invalid input, expected JSON"}), 400
 
 
 def delete_student(student_id: int):  # noqa: E501
@@ -35,10 +36,10 @@ def delete_student(student_id: int):  # noqa: E501
     """
     student = get_by_id(student_id)
     if not student:
-        return 404, "student not found"
+        return jsonify({"message": "Student not found"}), 404
 
     delete(student_id)
-    return {"message": "Student deleted successfully"}, 200
+    return jsonify({"message": "Student deleted successfully"}), 200
 
 
 def get_student_by_id(student_id: int):  # noqa: E501
@@ -53,10 +54,6 @@ def get_student_by_id(student_id: int):  # noqa: E501
     """
     student = get_by_id(student_id)
     if not student:
-        response = jsonify({"message": "Student not found"})
-        response.status_code = 404  # ✅ Correctly sets the HTTP 404 status
-        return response
+        return jsonify({"message": "Student not found"}), 404
 
-    response = jsonify({"message": student})
-    response.status_code = 200  # ✅ Correctly sets the HTTP 404 status
-    return response
+    return jsonify(student), 200
