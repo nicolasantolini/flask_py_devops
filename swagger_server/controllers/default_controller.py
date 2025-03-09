@@ -37,6 +37,7 @@ def delete_student(student_id: int):  # noqa: E501
     :type student_id: int
 
     :rtype: None
+
     """
 
     received_student_id = delete(student_id)
