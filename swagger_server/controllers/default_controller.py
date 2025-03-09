@@ -45,7 +45,7 @@ def delete_student(student_id: int):  # noqa: E501
         response = jsonify({"message": "Student not found"})
         response.status_code = 404
         return response
-    return delete(student_id)
+    return received_student_id
 
 
 def get_student_by_id(student_id: int):  # noqa: E501
